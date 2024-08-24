@@ -1,6 +1,6 @@
-# Lista de Tarefas ([Click Here](#))
+# Lista de Tarefas ([Click Here](https://to-do-list-2-0-ten.vercel.app/))
 
-<!-- ![Preview](./img/preview-desktop.png) -->
+![Preview](./img/preview-desktop.png)
 
 
 ## SOBRE ESTE PROJETO!
@@ -20,4 +20,4 @@ O objetivo do projeto é criar um website de "Lista de Tarefas".
 
 
 ## Acessar minha resolução
-Eu hospedei este projeto com a ajuda da [Vercel](https://vercel.com/), para acessar minha resolução deste desafio [Clique Aqui](#)
+Eu hospedei este projeto com a ajuda da [Vercel](https://vercel.com/), para acessar minha resolução deste desafio [Clique Aqui](https://to-do-list-2-0-ten.vercel.app/)
