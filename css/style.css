@@ -1,0 +1,192 @@
+:root {
+  --color-00: #ffffff;
+  --color-01: #f7f7f7;
+  --color-02: #ededed;
+  --color-03: #dedede;
+  --color-04: #cccccc;
+  --color-05: #b2b2b2;
+  --color-06: #9c9c9c;
+  --color-07: #717171;
+  --color-08: #595959;
+  --color-09: #404040;
+  --color-10: #2e2e2e;
+  --color-11: #111111;
+  --color-12: #000000;
+  --color-p1: #7952B3;
+  --color-p2: #9263d9;
+  --color-p3: #b474ff;
+  --color-p4: #bd73ff;
+  --text-low: #144709;
+  --bg-low: #deffd8;
+  --border-low: #b2e2ac;
+  --text-medium: #493F01;
+  --bg-medium: #FFFCDA;
+  --border-medium: #E2DDB1;
+  --text-high: #642221;
+  --bg-high: #FEDCDB;
+  --border-high: #DDA7A5;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* body {
+  font-size: 62.5%;
+}
+
+html {
+  font-size: 1.6rem;
+} */
+
+input,
+select {
+  border: none;
+  border-radius: 5px;
+}
+
+.btn-primary {
+  background: var(--color-p1);
+  border: none;
+}
+
+.btn-primary:hover {
+  background: var(--color-p2);
+}
+
+.container {
+  margin: 20px auto;
+  padding: 10px;
+  max-width: 730px;
+  border-radius: 5px;
+  background: var(--color-04);
+}
+
+.container-header {
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid var(--color-p1);
+}
+
+.todo-form {
+  margin: 20px 0;
+}
+
+.todo-add {
+  display: flex;
+  gap: 5px;
+}
+
+.todo-add input {
+  padding: 0 2px;
+  flex: 1;
+}
+
+.priority-select,
+.type-select {
+  text-align: center;
+}
+
+.toolbar {
+  margin: 20px 0;
+  padding: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 80px;
+  border-bottom: 2px solid var(--color-p1);
+}
+
+.search {
+  flex: 1;
+}
+
+.search-form {
+  display: flex;
+  gap: 5px;
+}
+
+.search-form input {
+  flex: 1;
+  padding: 0 2px;
+}
+
+.filter {
+  width: 20.5%;
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-select {
+  height: 100%;
+}
+
+.todo-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.todo {
+  width: 14.35rem;
+}
+
+.todo .priority {
+  padding: 2px 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  border-radius: 5px;
+}
+
+.todo .low {
+  color: var(--text-low);
+  background: var(--bg-low);
+  border: 1px solid var(--border-low);
+}
+
+.todo .medium {
+  color: var(--text-medium);
+  background: var(--bg-medium);
+  border: 1px solid var(--border-medium);
+}
+
+.todo .high {
+  color: var(--text-high);
+  background: var(--bg-high);
+  border: 1px solid var(--border-high);
+}
+
+.done {
+  background: var(--color-p4);
+  border: none;
+  border-radius: 5px;
+}
+
+.done h5 {
+  color: var(--color-white);
+  font-style: italic;
+  text-decoration: line-through;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 180px;
+  background-size: cover; 
+  background-position: center;
+  border-radius: 5px 5px 0 0;
+}
+
+.house {
+  background-image: url('./img/casa-card.png');
+}
+
+.hide {
+  display: none !important;
+}
