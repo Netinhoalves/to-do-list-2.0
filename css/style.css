@@ -31,15 +31,9 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Ubuntu', sans-serif;
+  text-decoration: none;
 }
-
-/* body {
-  font-size: 62.5%;
-}
-
-html {
-  font-size: 1.6rem;
-} */
 
 input,
 select {
@@ -47,12 +41,13 @@ select {
   border-radius: 5px;
 }
 
-.btn-primary {
+.btn {
   background: var(--color-p1);
+  color: var(--color-00);
   border: none;
 }
 
-.btn-primary:hover {
+.btn:hover {
   background: var(--color-p2);
 }
 
@@ -88,7 +83,8 @@ select {
 }
 
 .priority-select,
-.type-select {
+.type-select,
+.filter-select {
   text-align: center;
 }
 
@@ -97,7 +93,7 @@ select {
   padding: 20px 0;
   display: flex;
   justify-content: space-between;
-  gap: 80px;
+  gap: 76px;
   border-bottom: 2px solid var(--color-p1);
 }
 
@@ -116,7 +112,7 @@ select {
 }
 
 .filter {
-  width: 20.5%;
+  width: 15%;
   display: flex;
   flex-direction: column;
 }
@@ -163,6 +159,10 @@ select {
   border: 1px solid var(--border-high);
 }
 
+.card-body button {
+  margin-right: 5px;
+}
+
 .done {
   background: var(--color-p4);
   border: none;
@@ -173,18 +173,6 @@ select {
   color: var(--color-white);
   font-style: italic;
   text-decoration: line-through;
-}
-
-.card-img-top {
-  width: 100%;
-  height: 180px;
-  background-size: cover; 
-  background-position: center;
-  border-radius: 5px 5px 0 0;
-}
-
-.house {
-  background-image: url('./img/casa-card.png');
 }
 
 .hide {
