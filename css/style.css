@@ -37,6 +37,7 @@
 
 input,
 select {
+  height: 36px;
   border: none;
   border-radius: 5px;
 }
@@ -74,6 +75,7 @@ select {
 
 .todo-add {
   display: flex;
+  flex-wrap: wrap;
   gap: 5px;
 }
 
@@ -112,6 +114,7 @@ select {
   padding: 20px 0;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 76px;
   border-bottom: 2px solid var(--color-p1);
 }
@@ -134,10 +137,6 @@ select {
   width: 15%;
   display: flex;
   flex-direction: column;
-}
-
-.filter-select {
-  height: 100%;
 }
 
 .todo-list {
@@ -196,4 +195,48 @@ select {
 
 .hide {
   display: none !important;
+}
+
+@media (max-width: 750px) {
+  .container {
+  max-width: 500px;
+  }
+  .toolbar {
+    gap: 30px;
+  }
+  .toolbar .filter {
+    width: 100px;
+  }
+  .todo-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+}
+
+@media (max-width: 500px) {
+  .container {
+    max-width: 400px;
+  }
+  .todo-add {
+    justify-content: space-between;
+  }
+  .toolbar {
+    gap: 5px;
+  }
+  .todo {
+    width: 11rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .container {
+    max-width: 300px;
+  }
+  .todo-list {
+    grid-template-columns: 1fr;
+  }
+  .todo {
+    width: 17.5rem;
+  }
 }
