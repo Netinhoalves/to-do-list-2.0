@@ -50,6 +50,28 @@
         </button>
       </div>
     </form>
+    <form id="edit-form" class="edit-form hide">
+      <h6>Edite a sua tarefa:</h6>
+      <div id="todo-edit" class="todo-edit">
+        <input type="text" id="edit-input" placeholder="Edite aqui">
+        <select id="edit-type-select" class="type-select">
+          <option selected>Tipo</option>
+          <option value="house">Casa</option>
+          <option value="education">Ensino</option>
+          <option value="work">Trabalho</option>
+        </select>
+        <select id="edit-priority-select" class="priority-select">
+          <option selected>Prioridade</option>
+          <option value="low">Baixa</option>
+          <option value="medium">Média</option>
+          <option value="high">Alta</option>
+        </select>
+        <button type="submit" class="btn">
+          <i class="fa-solid fa-check"></i>
+        </button>
+      </div>
+      <button id="cancel-edit-btn" class="btn cancel-edit-btn">Cancelar</button>
+    </form>
     <div id="toolbar" class="toolbar">
       <div id="search" class="search">
         <h6>Pesquisar:</h6>

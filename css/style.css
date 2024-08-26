@@ -88,6 +88,25 @@ select {
   text-align: center;
 }
 
+.edit-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.todo-edit {
+  margin-bottom: 10px;
+  display: flex;
+  gap: 5px;
+}
+
+.todo-edit input {
+  flex: 1;
+}
+
+.cancel-edit-btn {
+  align-self: flex-end;
+}
+
 .toolbar {
   margin: 20px 0;
   padding: 20px 0;
