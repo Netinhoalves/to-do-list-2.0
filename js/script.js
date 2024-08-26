@@ -54,6 +54,7 @@ const saveTodo = (text, type, priority, done = false) => {
 
   finishBtn.addEventListener('click', () => {
     todo.classList.toggle('done');
+    saveTodosToLocalStorage();
   });
 
   const editBtn = document.createElement('button');
@@ -66,6 +67,7 @@ const saveTodo = (text, type, priority, done = false) => {
     editTypeSelect.value = type;
     editPrioritySelect.value = priority;
     toggleForms();
+    window.currentTodo = { title: title.innerText, type, priority, done };
   });
 
   const removeBtn = document.createElement('button');
@@ -75,6 +77,7 @@ const saveTodo = (text, type, priority, done = false) => {
 
   removeBtn.addEventListener('click', () => {
     todo.remove();
+    saveTodosToLocalStorage();
   });
 
   todo.appendChild(cardBody);
@@ -84,6 +87,7 @@ const saveTodo = (text, type, priority, done = false) => {
   }
 
   todoList.appendChild(todo);
+  saveTodosToLocalStorage();
 };
 
 todoForm.addEventListener('submit', (e) => {
@@ -199,3 +203,81 @@ cancelEditBtn.addEventListener('click', (e) => {
 
   toggleForms();
 });
+
+const saveTodosToLocalStorage = () => {
+  const todos = [];
+  document.querySelectorAll('.todo').forEach((todo) => {
+    const title = todo.querySelector('.card-title').innerText;
+    const type = todo.querySelector('.card-img-top').classList[1];
+    const priority = todo.querySelector('.priority').classList[1];
+    const done = todo.classList.contains('done');
+    todos.push({ title, type, priority, done });
+  });
+  localStorage.setItem('todos', JSON.stringify(todos));
+};
+
+const loadTodosFromLocalStorage = () => {
+  const todos = JSON.parse(localStorage.getItem('todos')) || [];
+  todos.forEach((todo) => {
+    saveTodo(todo.title, todo.type, todo.priority, todo.done);
+  });
+};
+
+editForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const editInputValue = editInput.value.trim();
+  const editTypeValue = editTypeSelect.value;
+  const editPriorityValue = editPrioritySelect.value;
+
+  if (
+    !editInputValue ||
+    editTypeValue === 'Tipo' ||
+    editPriorityValue === 'Prioridade'
+  ) {
+    $('#feedbackModal').modal('show');
+    return;
+  }
+
+  const updatedText = editInputValue;
+  const updatedType = editTypeValue;
+  const updatedPriority = editPriorityValue;
+
+  const todo = Array.from(document.querySelectorAll('.todo')).find((todo) => {
+    return (
+      todo.querySelector('.card-title').innerText ===
+        window.currentTodo.title &&
+      todo
+        .querySelector('.card-img-top')
+        .classList.contains(window.currentTodo.type) &&
+      todo
+        .querySelector('.priority')
+        .classList.contains(window.currentTodo.priority)
+    );
+  });
+
+  if (todo) {
+    todo.querySelector('.card-title').innerText = updatedText;
+    todo
+      .querySelector('.card-img-top')
+      .classList.replace(window.currentTodo.type, updatedType);
+    todo.querySelector('.card-img-top').src = typeImageMap[updatedType];
+    todo
+      .querySelector('.priority')
+      .classList.replace(window.currentTodo.priority, updatedPriority);
+    todo.querySelector('.priority').innerText = priorityMap[updatedPriority];
+
+    window.currentTodo = {
+      title: updatedText,
+      type: updatedType,
+      priority: updatedPriority,
+      done: todo.classList.contains('done'),
+    };
+
+    saveTodosToLocalStorage();
+
+    toggleForms();
+  }
+});
+
+document.addEventListener('DOMContentLoaded', loadTodosFromLocalStorage);
