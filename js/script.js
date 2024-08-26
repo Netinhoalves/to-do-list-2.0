@@ -1,4 +1,3 @@
-// Seleção de elemnetos
 const todoForm = document.querySelector('#todo-form');
 const todoInput = document.querySelector('#todo-input');
 const todoTypeSelect = document.querySelector('#todo-type-select');
@@ -8,22 +7,24 @@ const toolbar = document.querySelector('#toolbar');
 const searchInput = document.querySelector('#search-input');
 const eraseButton = document.querySelector('#erase-button');
 const filterSelect = document.querySelector('#filter-select');
+const editForm = document.querySelector('#edit-form');
+const editInput = document.querySelector('#edit-input');
+const editTypeSelect = document.querySelector('#edit-type-select');
+const editPrioritySelect = document.querySelector('#edit-priority-select');
+const cancelEditBtn = document.querySelector('#cancel-edit-btn');
 
-// Mapeando os tipos
 const typeImageMap = {
   house: './img/casa-card.png',
   education: './img/ensino-card.png',
   work: './img/trabalho-card.png',
 };
 
-// Mapeando as prioridades
 const priorityMap = {
   low: 'Baixa',
   medium: 'Média',
   high: 'Alta',
 };
 
-// Funções
 const saveTodo = (text, type, priority, done = false) => {
   const todo = document.createElement('div');
   todo.classList.add('todo', 'card');
@@ -51,15 +52,30 @@ const saveTodo = (text, type, priority, done = false) => {
   finishBtn.innerHTML = '<i class="fa-solid fa-check"></i>';
   cardBody.appendChild(finishBtn);
 
+  finishBtn.addEventListener('click', () => {
+    todo.classList.toggle('done');
+  });
+
   const editBtn = document.createElement('button');
   editBtn.classList.add('edit-todo', 'btn');
   editBtn.innerHTML = '<i class="fa-solid fa-pen"></i>';
   cardBody.appendChild(editBtn);
 
+  editBtn.addEventListener('click', () => {
+    editInput.value = text;
+    editTypeSelect.value = type;
+    editPrioritySelect.value = priority;
+    toggleForms();
+  });
+
   const removeBtn = document.createElement('button');
   removeBtn.classList.add('remove-todo', 'btn');
   removeBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
   cardBody.appendChild(removeBtn);
+
+  removeBtn.addEventListener('click', () => {
+    todo.remove();
+  });
 
   todo.appendChild(cardBody);
 
@@ -69,6 +85,23 @@ const saveTodo = (text, type, priority, done = false) => {
 
   todoList.appendChild(todo);
 };
+
+todoForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const inputValue = todoInput.value.trim();
+  const typeValue = todoTypeSelect.value;
+  const priorityValue = todoPrioritySelect.value;
+
+  if (inputValue && typeValue !== 'Tipo' && priorityValue !== 'Prioridade') {
+    saveTodo(inputValue, typeValue, priorityValue, false);
+    todoInput.value = '';
+    todoTypeSelect.value = 'Tipo';
+    todoPrioritySelect.value = 'Prioridade';
+  } else {
+    $('#feedbackModal').modal('show');
+  }
+});
 
 const searchTodos = (searchValue) => {
   const todos = document.querySelectorAll('.todo');
@@ -83,6 +116,18 @@ const searchTodos = (searchValue) => {
     }
   });
 };
+
+searchInput.addEventListener('input', (e) => {
+  const searchValue = e.target.value.toLowerCase();
+  searchTodos(searchValue);
+});
+
+eraseButton.addEventListener('click', (e) => {
+  e.preventDefault();
+
+  searchInput.value = '';
+  searchTodos('');
+});
 
 const filterTodos = (filter) => {
   const todos = document.querySelectorAll('.todo');
@@ -138,36 +183,19 @@ const filterTodos = (filter) => {
   });
 };
 
-// Eventos
-todoForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-
-  const inputValue = todoInput.value.trim();
-  const typeValue = todoTypeSelect.value;
-  const priorityValue = todoPrioritySelect.value;
-
-  if (inputValue && typeValue !== 'Tipo' && priorityValue !== 'Prioridade') {
-    saveTodo(inputValue, typeValue, priorityValue, false);
-    todoInput.value = '';
-    todoTypeSelect.value = 'Tipo';
-    todoPrioritySelect.value = 'Prioridade';
-  } else {
-    $('#feedbackModal').modal('show');
-  }
-});
-
-searchInput.addEventListener('input', (e) => {
-  const searchValue = e.target.value.toLowerCase();
-  searchTodos(searchValue);
-});
-
-eraseButton.addEventListener('click', (e) => {
-  e.preventDefault();
-
-  searchInput.value = '';
-  searchTodos('');
-});
-
 filterSelect.addEventListener('change', (e) => {
   filterTodos(e.target.value);
+});
+
+const toggleForms = () => {
+  editForm.classList.toggle('hide');
+  todoForm.classList.toggle('hide');
+  toolbar.classList.toggle('hide');
+  todoList.classList.toggle('hide');
+};
+
+cancelEditBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+
+  toggleForms();
 });
